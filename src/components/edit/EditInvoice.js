@@ -1,8 +1,7 @@
 import React from "react";
-
 import { withRouter } from "react-router-dom";
 
-class CreateInvoice extends React.Component {
+class EditInvoice extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,6 +14,21 @@ class CreateInvoice extends React.Component {
 
     this.onChangeInput = this.onChangeInput.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    this.getInvoice(id);
+  }
+
+  getInvoice(id) {
+    const apiUrl = `http://localhost:3004/invoices/${id}`;
+    fetch(apiUrl, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((result) => this.setState(result))
+      .then(() => console.log(this.state));
   }
 
   onChangeInput(event) {
@@ -40,22 +54,26 @@ class CreateInvoice extends React.Component {
     }
 
     const request = {
+      id: this.state.id,
       number: this.state.number,
       date_created: this.state.date_created,
       date_supplied: this.state.date_supplied,
       comment: this.state.comment,
     };
-    fetch("http://localhost:3004/invoices/", {
-      method: "POST",
+
+    fetch(`http://localhost:3004/invoices/${request.id}`, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(request),
-    }).then(() => this.props.history.push("/"));
+    }).then(() => {
+      this.props.history.push("/");
+    });
   }
 
   render() {
     return (
       <div>
-        <h1>Create Invoice</h1>
+        <h1>Edit Invoice</h1>
 
         <div className="wrapper">
           <form>
@@ -138,5 +156,4 @@ class CreateInvoice extends React.Component {
     );
   }
 }
-
-export default withRouter(CreateInvoice);
+export default withRouter(EditInvoice);

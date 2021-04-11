@@ -52,7 +52,7 @@ h2 {
   color: #5a5b5a;
   font-weight: 600;
 }
-button {
+.btn {
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
@@ -84,6 +84,26 @@ td {
 .invoiceNumber {
   color: #6b8dff;
 }
+.remove-btn, .edit-btn{
+  background-color: white;
+  padding-right:10px;
+  color: #5a5b5a;
+  opacity: 0.3;
+  height: 0;
+  padding-bottom: 20px;
+  margin: auto 0;
+  border: none;
+  outline: none;
+}
+
+.remove-btn:hover, .edit-btn:hover{
+  opacity: 0.5;
+}
+.action-row{
+  height: 55px;
+  display: flex;
+}
+
 /*End main style*/
 
 /*Start create style*/

@@ -17,7 +17,7 @@ export default function InvoiceList() {
       </div>
       <div className="invoices">
         <h2>Actions</h2>
-        <button onClick={routeChange}>Add new</button>
+        <button  className="btn" onClick={routeChange}>Add new</button>
       </div>
       <InvoiceTable />
     </div>
